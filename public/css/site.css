@@ -1,0 +1,61 @@
+ body{
+        background:#CBEDE7;
+      }
+
+      table{
+        background:#70C2EB;
+        /*border:2px solid #2097AC;*/
+        border-top:1px solid blue;
+        border-left:1px solid blue;
+      }
+
+      table thead{
+        background:#708EE0;
+        font-size:30px;
+        font-family:arial;
+      }
+
+      input[type="text"],input[type="file"],input[type="password"]{
+        width:250px;
+        height:30px;
+        font-size:20px;
+        color:#9F5998;
+        border:1px dotted red;
+      }
+      select{
+        width:250px;
+      }
+      input[type="submit"]{
+        width:250px;
+        height:30px;
+        background:black;
+        color:white;
+        font-size:20px;
+      }
+      textarea{
+        width:250px;
+        height:60px;
+      }
+      td{
+        font-size:20px;
+        font-family:arial;
+        border-right:1px solid blue;
+        border-bottom:1px solid blue;
+        height:40px;
+        padding-left:10px;
+        padding-right:10px;
+      }
+      .error {
+        color: #FFFFFF;
+        background:#b94a48;
+        width:300px;
+      }
+      .success {
+        color: green;
+        background:lightyellow;
+        width:300px;
+      }
+.container .jumbotron {
+    margin-top: 100px;
+
+}

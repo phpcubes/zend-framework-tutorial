@@ -1,0 +1,14 @@
+<?php
+
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+{
+
+  protected function _initMisc() {
+    // Place this in your bootstrap file before dispatching your front controller
+    $writer = new Zend_Log_Writer_Firebug();
+    $logger = new Zend_Log($writer);
+    // Use this in your model, view and controller files
+    $logger->log('This is a log message!', Zend_Log::INFO);
+  }
+}
+

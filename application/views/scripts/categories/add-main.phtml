@@ -1,0 +1,32 @@
+
+<?php if(isset($this->id)){?>
+<div class="success">Cat has been inserted successfully at Id<?=$this->id?></div>
+<?php }?>
+
+<form action="" method="post">
+  <input type="text" name="name" placeholder="Main Category.."/><br><br>
+  <input type="submit" value="Add Main category" />
+</form>
+<hr>
+<table  class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+<?php
+foreach($this->cats as $val) {
+
+?>
+    <tr>
+      <td ><?=$val->id?></td>
+      <td ><a href="<?=$this->url(array('action'=>'add-sub','pid'=>$val->id))?>"><?=$val->name?></a></td>
+    </tr>
+<?php
+}
+?>
+
+  </tbody>
+</table>

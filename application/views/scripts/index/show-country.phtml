@@ -1,0 +1,43 @@
+<script type="text/javascript">
+//alert(SITE_PATH)
+/*
+  $(function(){
+*/
+  jQuery(document).ready(function(){
+      var URL = SITE_PATH+'/index/ajax-test';
+      $.ajax({
+        url:URL,
+        data:{'id':23,'name':'ajay'},
+        type:'POST',
+        dataType:'json',
+        beforeSend:function(){
+          $('#countryLoaderId').html('<img src="'+SITE_PATH+'/img/loader.gif" />');
+        },
+
+        success:function(data){
+var select = '<select name="country">';
+$.each(data,function(key,value){
+//console.log(key)
+//console.log(value)
+//console.log('--------------')
+select += '<option value="'+key+'">'+value+'</option>';
+});
+select += '</select>';
+console.log(select);
+$('#countryDivId').html(select);
+        },
+        complete:function(){
+
+         $('#countryLoaderId').html('');
+        },
+        error: function(xhr,status,error) {
+        //   alert('Error: ' + status) ;
+        }
+      });
+
+  });
+</script>
+
+Country Ajax 
+<div id="countryDivId"></div>
+<span id="countryLoaderId"></span>

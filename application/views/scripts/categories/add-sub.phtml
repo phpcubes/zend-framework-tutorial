@@ -1,0 +1,138 @@
+
+<?php if(isset($this->id)){?>
+<div class="success">Cat has been inserted successfully at Id<?=$this->id?></div>
+<?php }?>
+
+
+
+
+
+<select id="parentCatId" name="parent_id" >
+<?php
+foreach($this->cats as $val) {
+	$selected = ($val->id == $this->pid) ? 'selected':'';
+?>
+  <option <?=$selected?> value="<?=$val->id?>"><?=$val->name?></option>
+<?php }?>
+</select><span class="loader"></span>
+  <br><br>
+
+  <input type="text" name="name" id="sub_cat_name_id" placeholder="Sub Category.."/><br><br>
+<button id="sub_cat_add_id" type="button" class="btn btn-success">Add Sub Cat</button>
+
+
+
+
+
+
+
+
+<hr>
+<table  class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+<?php
+foreach($this->sub_cats as $val) {
+
+?>
+    <tr class="del">
+      <td ><?=$val->id?></td>
+      <td ><?=$val->name?></td>
+    </tr>
+<?php
+}
+?>
+
+  </tbody>
+</table>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+
+	
+    $('#parentCatId').on('change',function(){
+      var id = $(this).val();
+
+			$.ajax({
+				
+				url:'/categories/ajax-get-sub-cat',
+				data:{'id':id},
+				dataType:'json',
+				type:'post',
+				beforeSend:function(){
+					$('.loader').html('<i class="icon-spinner icon-spin icon-large"></i>');
+				//	alert("Hello")
+				},
+				success:function(data){
+					$('.del').each(function(i,j){
+//console.log(i)
+//console.log(j)
+						$(this).remove();					
+					})
+					//alert('after return')
+					$.each(data,function(i,j){
+						console.log(j)
+var row=						
+	'<tr class="del">\
+		<td>'+j.id+'</td>\
+		<td>'+j.name+'</td>\
+	</tr>';
+$('tbody').append(row);
+					
+					})
+					
+				},
+				complete:function(){
+					//alert('complete')
+										$('.loader').html('');					
+				}
+			});
+    });
+    
+    
+    
+        $('#sub_cat_add_id').on('click',function(){
+      var id = $('#parentCatId').val();
+			var cat_name = $('#sub_cat_name_id').val();
+			$.ajax({
+				
+				url:'/categories/ajax-add-sub-cat',
+				data:{'parent_id':id,'name':cat_name},
+				dataType:'json',
+				type:'post',
+				beforeSend:function(){
+					$('.loader').html('<i class="icon-spinner icon-spin icon-large"></i>');
+				//	alert("Hello")
+				},
+				success:function(data){
+					//alert('after return')
+					$.each(data,function(i,j){
+						console.log(j)
+var row=						
+	'<tr class="del">\
+		<td>'+j.id+'</td>\
+		<td>'+j.name+'</td>\
+	</tr>';
+$('tbody').append(row);
+					
+					})
+					
+				},
+				complete:function(){
+					//alert('complete')
+										$('.loader').html('');					
+				}
+			});
+    });
+
+
+
+
+    
+  });
+</script>

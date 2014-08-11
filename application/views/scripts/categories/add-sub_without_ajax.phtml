@@ -1,0 +1,51 @@
+
+<?php if(isset($this->id)){?>
+<div class="success">Cat has been inserted successfully at Id<?=$this->id?></div>
+<?php }?>
+
+<form action="" method="post">
+<select id="parentCatId" name="parent_id" >
+<?php
+foreach($this->cats as $val) {
+	$selected = ($val->id == $this->pid) ? 'selected':'';
+?>
+  <option <?=$selected?> value="<?=$val->id?>"><?=$val->name?></option>
+<?php }?>
+</select>
+  <br><br>
+
+  <input type="text" name="name" placeholder="Sub Category.."/><br><br>
+  <input type="submit" value="Add Main category" />
+</form>
+<hr>
+<table  class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+<?php
+foreach($this->sub_cats as $val) {
+
+?>
+    <tr>
+      <td ><?=$val->id?></td>
+      <td ><?=$val->name?></td>
+    </tr>
+<?php
+}
+?>
+
+  </tbody>
+</table>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $('#parentCatId').on('change',function(){
+      var id = $(this).val();
+      window.location = '/categories/add-sub/pid/'+id;
+    });
+  });
+</script>
